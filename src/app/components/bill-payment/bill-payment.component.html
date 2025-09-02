@@ -1,0 +1,96 @@
+<div class="page-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">Quick EBill</div>
+    <div class="user-info">
+      <span class="welcome">Welcome, {{ customerName }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a routerLink="/home" class="nav-item">HOME</a>
+    <a routerLink="/view-bill-pay" class="nav-item">Pay Bill</a>
+    <a href="#" (click)="onRegisterComplaintClick($event)" class="nav-item">REGISTER COMPLAINT</a>
+    <a href="#" (click)="onComplaintStatusClick($event)" class="nav-item">COMPLAINT STATUS</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h1>Bill Payment</h1>
+    </div>
+    
+    <div class="payment-container">
+      <!-- Bill Details Panel -->
+      <div class="bill-details-panel">
+        <h3>Bill Details</h3>
+        <div class="detail-row">
+          <span>Bill Amount:</span>
+          <span class="amount">₹{{ getBillAmount() }}</span>
+        </div>
+        <div class="detail-row">
+          <span>Total Payable Amount:</span>
+          <span class="amount">₹{{ getTotalPayableAmount() }}</span>
+        </div>
+        <div class="detail-row">
+          <span>PG Charge:</span>
+          <span class="amount">As Applicable</span>
+        </div>
+      </div>
+
+      <!-- Bills Table -->
+      <div class="content-card">
+        <h3>Selected Bills</h3>
+        <div class="bills-table-container">
+          <table class="bills-table">
+            <thead>
+              <tr>
+                <th>Consumer Number</th>
+                <th>Bill Number</th>
+                <th>Payable Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bill of selectedBills; let i = index" [class.even]="i % 2 === 0">
+                <td>{{ bill.consumerNumber }}</td>
+                <td>{{ bill.billNumber }}</td>
+                <td>{{ bill.payableAmount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Payment Mode -->
+        <div class="payment-mode-section">
+          <h4>Payment Mode</h4>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input 
+                type="radio" 
+                name="paymentMode" 
+                value="credit" 
+                [(ngModel)]="paymentMode">
+              <span>Credit Card</span>
+            </label>
+            <label class="radio-item">
+              <input 
+                type="radio" 
+                name="paymentMode" 
+                value="debit" 
+                [(ngModel)]="paymentMode">
+              <span>Debit Card</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn-primary" (click)="payNow()">Pay Now</button>
+          <button class="btn-secondary" (click)="backToHome()">Back to Home</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

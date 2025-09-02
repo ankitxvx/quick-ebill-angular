@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Quick EBill Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input 
+          type="text" 
+          id="userId" 
+          formControlName="userId"
+          class="form-control"
+          [class.error]="isFieldInvalid('userId')">
+        <div class="error-message" *ngIf="isFieldInvalid('userId')">
+          User ID is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password"
+          class="form-control"
+          [class.error]="isFieldInvalid('password')">
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          Password is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">
+        Sign In
+      </button>
+    </form>
+
+    <div class="links">
+      <a href="#" (click)="onRegisterClick($event)">Register</a>
+      <a href="#" (click)="onForgotPasswordClick($event)">Forgot Password?</a>
+    </div>
+  </div>
+</div>

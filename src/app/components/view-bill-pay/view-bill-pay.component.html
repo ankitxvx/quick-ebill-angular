@@ -1,0 +1,66 @@
+<div class="page-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">Quick EBill</div>
+    <div class="user-info">
+      <span class="welcome">Welcome, {{ customerName }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a routerLink="/home" class="nav-item">HOME</a>
+    <a routerLink="/view-bill-pay" routerLinkActive="active" class="nav-item">Pay Bill</a>
+    <a href="#" (click)="onRegisterComplaintClick($event)" class="nav-item">REGISTER COMPLAINT</a>
+    <a href="#" (click)="onComplaintStatusClick($event)" class="nav-item">COMPLAINT STATUS</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h1>View Bill & Pay</h1>
+    </div>
+    
+    <div class="content-card">
+      <div class="bills-table-container">
+        <table class="bills-table">
+          <thead>
+            <tr>
+              <th>Consumer Number</th>
+              <th>Select</th>
+              <th>Due Amount (₹)</th>
+              <th>Payable (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bill of bills; let i = index" [class.even]="i % 2 === 0">
+              <td>{{ bill.consumerNumber }}</td>
+              <td>
+                <input 
+                  type="checkbox" 
+                  [(ngModel)]="bill.selected"
+                  class="checkbox">
+              </td>
+              <td>{{ bill.dueAmount }}</td>
+              <td>{{ bill.payableAmount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="total-section">
+        <div class="total-amount">
+          <strong>Total Amount Payable: <span class="amount">₹{{ getTotalPayable() }}</span></strong>
+        </div>
+        
+        <button 
+          class="proceed-btn" 
+          [disabled]="!hasSelectedBills()"
+          (click)="proceedToPay()">
+          Proceed To Pay
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

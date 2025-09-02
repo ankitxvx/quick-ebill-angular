@@ -1,0 +1,30 @@
+<div class="page-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">Quick EBill</div>
+    <div class="user-info">
+      <span class="welcome">Welcome, {{ customerName }}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <a routerLink="/home" routerLinkActive="active" class="nav-item">HOME</a>
+    <a routerLink="/view-bill-pay" class="nav-item">Pay Bill</a>
+    <a href="#" (click)="onRegisterComplaintClick($event)" class="nav-item">REGISTER COMPLAINT</a>
+    <a href="#" (click)="onComplaintStatusClick($event)" class="nav-item">COMPLAINT STATUS</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h1>Home Page</h1>
+    </div>
+    
+    <div class="content-card">
+      <h2>Consumer Home Page</h2>
+      <p>Welcome to Quick EBill system. Use the navigation menu to access different features.</p>
+    </div>
+  </main>
+</div>
