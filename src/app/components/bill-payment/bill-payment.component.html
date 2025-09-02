@@ -1,0 +1,87 @@
+<div class="bill-payment-container">
+  <main class="main-content">
+    <div class="section-header">
+      <h2>Bill Payment</h2>
+    </div>
+    <div class="content-card">
+      <div class="card-body">
+        <!-- Bill Details Panel -->
+        <div class="bill-details-panel">
+          <h3>Bill Details</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Bill Amount:</span>
+              <span class="detail-value">₹{{ billAmount }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Total Payable Amount:</span>
+              <span class="detail-value highlight">₹{{ totalPayableAmount }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">PG Charge:</span>
+              <span class="detail-value">As Applicable</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected Bills Table -->
+        <div class="selected-bills-section">
+          <h3>Selected Bills</h3>
+          <div class="table-container">
+            <table class="bills-table">
+              <thead>
+                <tr>
+                  <th>Consumer Number</th>
+                  <th>Bill Number</th>
+                  <th>Payable Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bill of selectedBills; let i = index" [class.even]="i % 2 === 0">
+                  <td>{{ bill.consumerNumber }}</td>
+                  <td>{{ bill.billNumber }}</td>
+                  <td>{{ bill.payableAmount }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payment Mode Selection -->
+        <div class="payment-mode-section">
+          <h3>Payment Mode</h3>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input 
+                type="radio" 
+                name="paymentMode" 
+                value="credit"
+                [(ngModel)]="selectedPaymentMode"
+              >
+              <span class="radio-label">Credit Card</span>
+            </label>
+            <label class="radio-item">
+              <input 
+                type="radio" 
+                name="paymentMode" 
+                value="debit"
+                [(ngModel)]="selectedPaymentMode"
+              >
+              <span class="radio-label">Debit Card</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+          <button class="btn btn-secondary" (click)="backToHome()">
+            Back to Home
+          </button>
+          <button class="btn btn-primary" (click)="payNow()">
+            Pay Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

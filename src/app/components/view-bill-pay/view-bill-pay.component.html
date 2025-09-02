@@ -1,0 +1,76 @@
+<div class="view-bill-pay-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">Quick EBill</div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-items">
+      <button class="nav-item" (click)="navigateToHome()">HOME</button>
+      <button class="nav-item active">Pay Bill</button>
+      <button class="nav-item" (click)="navigateToRegisterComplaint()">REGISTER COMPLAINT</button>
+      <button class="nav-item" (click)="navigateToComplaintStatus()">COMPLAINT STATUS</button>
+    </div>
+  </nav>
+
+  <!-- Welcome Section -->
+  <div class="welcome-section">
+    <div class="welcome-text">Welcome, {{ customerName }}!</div>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h2>View Bill & Pay</h2>
+    </div>
+    <div class="content-card">
+      <div class="card-body">
+        <div class="table-container">
+          <table class="bills-table">
+            <thead>
+              <tr>
+                <th>Consumer Number</th>
+                <th>Select</th>
+                <th>Due Amount (₹)</th>
+                <th>Payable (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bill of billData; let i = index" [class.even]="i % 2 === 0">
+                <td>{{ bill.consumerNumber }}</td>
+                <td>
+                  <input 
+                    type="checkbox" 
+                    [(ngModel)]="bill.selected"
+                    class="bill-checkbox"
+                  >
+                </td>
+                <td>{{ bill.dueAmount }}</td>
+                <td>{{ bill.payableAmount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="total-section">
+          <div class="total-amount">
+            <span class="total-label">Total Amount Payable: </span>
+            <span class="total-value">₹{{ totalPayable }}</span>
+          </div>
+        </div>
+
+        <div class="action-section">
+          <button 
+            class="btn btn-primary proceed-btn"
+            [disabled]="!hasSelectedBills"
+            (click)="proceedToPay()"
+          >
+            Proceed to Pay
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
